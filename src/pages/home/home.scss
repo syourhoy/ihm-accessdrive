@@ -6,4 +6,21 @@ page-home {
         margin-right: auto;
         width: 40%;
     } 
+    #phone {
+        border: 1px solid #b7bbbd;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        padding: 4px;
+        width: 140px;
+    }
+
+    .form-all input,select {
+        border: 1px solid #b7bbbd;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        padding: 4px;
+        width: 140px;
+        }
 }
