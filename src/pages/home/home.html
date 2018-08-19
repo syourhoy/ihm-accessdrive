@@ -1,14 +1,22 @@
-<ion-header>
+<!-- <ion-header>
   <ion-navbar>
     <ion-title>
       Ionic Blank
     </ion-title>
   </ion-navbar>
-</ion-header>
+</ion-header> -->
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content padding class="page-home">
+  <img src="../../assets/imgs/accessdrive-logo.png" class="logo-home">
+  <form (ngSubmit)="logForm()">
+      <ion-item>
+          <ion-input type="number" placeholder="Numéro de Telephone" [(ngModel)]="form.number" name="number"></ion-input>
+        
+      </ion-item>
+      <ion-item>
+          <ion-checkbox [(ngModel)]="form.save" name="save"></ion-checkbox>
+      </ion-item>
+      
+      <button ion-button type="submit" block>Add Number</button>
+    </form>
 </ion-content>
