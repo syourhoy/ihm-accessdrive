@@ -1,26 +1,98 @@
-page-home {
+.page-home {
+    padding-top: 25%;
     .logo-home {
         display: block;
-        margin-top: 15%;
         margin-left: auto;
         margin-right: auto;
-        width: 40%;
-    } 
-    #phone {
-        border: 1px solid #b7bbbd;
-        -webkit-border-radius: 5px;
-        -moz-border-radius: 5px;
-        border-radius: 5px;
-        padding: 4px;
-        width: 140px;
+        width: 35%;
+        margin-bottom: 60px;
     }
-
-    .form-all input,select {
-        border: 1px solid #b7bbbd;
-        -webkit-border-radius: 5px;
-        -moz-border-radius: 5px;
-        border-radius: 5px;
-        padding: 4px;
-        width: 140px;
+    .phoneNumber {
+        border-radius: 15px;
+        border: 1px solid;
+        border-color: #D8D8D8;
+        width: 75%;
+        margin-left: auto;
+        margin-right: auto;
+        font-family: "Roboto";
+        font-size: 17px;
+        .text-input-md {
+            text-align: center;
+            margin: 17px 8px 15px;
         }
+        ::placeholder {
+            color: #929292;
+            font-size: 17px;
+            font-family: "Roboto";
+            text-align: center;
+            font-weight: 200;
+        }
+    }
+    .phoneSaveWrapper {
+        display: block;
+        margin-left: 15%;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        .phoneCheck {
+            display: inline-block;
+            margin-right: 15px;
+            .checkbox-icon {
+                border-radius: 100%;
+                border-color: black;
+                height: 20px;
+                width: 20px;
+                .checkbox-inner {
+                    left: 5px;
+                    top: 2px;
+                }
+            }
+            .checkbox-checked {
+                background-color: black;
+            }
+        }
+        .phoneSave {
+            display: inline-block;
+            margin: 0;
+            font-size: 17px;
+            font-family: "Roboto";
+            text-align: center;
+            font-weight: 200;
+        }
+    }
+    .connect {
+        font-family: "Roboto";
+        text-align: center;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 15px;
+        height: 50px;
+        width: 75%;
+        background-color: #33cb98 !important;
+        text-transform: none;
+        box-shadow: none;
+        font-size: 18px;
+    }
+    .separator {
+        background-color: #D8D8D8;
+        height: 1px;
+        display: block;
+        width: 75%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 50px;
+        margin-bottom: 20px;
+    }
+    .bottomMess {
+        color: #33cb98;
+        font-family: "Roboto";
+        font-weight: 500;
+        font-style: italic;
+        display: block;
+        width: 70%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-right: 15%;
+        font-size: 14px;
+    }
 }

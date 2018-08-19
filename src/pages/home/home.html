@@ -1,22 +1,26 @@
-<!-- <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
-</ion-header> -->
+<ion-content>
+  <section class="page-home">
+    <img src="../../assets/imgs/accessdrive-logo.png" class="logo-home">
+    <form (ngSubmit)="logForm()">
+      <div class="item-wrapper">
+        <ion-input class="phoneNumber" placeholder="Numéro de téléphone" [(ngModel)]="form.number" name="number"></ion-input>
+      </div>
 
-<ion-content padding class="page-home">
-  <img src="../../assets/imgs/accessdrive-logo.png" class="logo-home">
-  <form (ngSubmit)="logForm()">
-      <ion-item>
-          <ion-input id="phone" type="number" placeholder="Numéro de Telephone" [(ngModel)]="form.number" name="number"></ion-input>
-      </ion-item>
+      <div class="phoneSaveWrapper item-wrapper">
+        <ion-checkbox class="phoneCheck" [(ngModel)]="form.save" name="save"></ion-checkbox>
+        <ion-label class="phoneSave">Se souvenir de moi</ion-label>
+      </div>
 
-      <ion-item>
-          <ion-checkbox [(ngModel)]="form.save" name="save"></ion-checkbox>
-      </ion-item>
-      
-      <button ion-button type="submit" block>Add Number</button>
+      <div class="item-wrapper">
+        <button class="connect" ion-button>Se connecter</button>
+      </div>
     </form>
+
+    <div class="separator"></div>
+
+    <div class="bottomMess">
+      Vous pouvez également vous connecter avec l'aide d'un réseau social
+    </div>
+
+  </section>
 </ion-content>
