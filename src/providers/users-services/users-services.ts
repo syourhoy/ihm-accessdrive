@@ -1,4 +1,4 @@
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
 
 /*
@@ -10,8 +10,20 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class UsersServicesProvider {
 
+  apiUrl = 'http://localhost:3000/api';
+
   constructor(public http: Http) {
     console.log('Hello UsersServicesProvider Provider');
+  }
+
+  getUsers(body:{number: string;}){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    this.http.post(this.apiUrl + '/user/create', JSON.stringify(body), {headers: headers})
+    .map(res => res.json())
+    .subscribe(data => {
+      console.log(data);
+    });
   }
 
 }
