@@ -23,6 +23,7 @@ export class UsersServicesProvider {
     .map(res => res.json())
     .subscribe(data => {
       console.log(data);
+      return data;
     });
   }
 
