@@ -9,6 +9,8 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { UsersServicesProvider } from '../providers/users-services/users-services';
 import { SearchPage } from '../pages/search/search';
+import { Geolocation } from '@ionic-native/geolocation';
+
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { SearchPage } from '../pages/search/search';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    UsersServicesProvider
+    UsersServicesProvider,
+    Geolocation
+
   ]
 })
 export class AppModule {}
