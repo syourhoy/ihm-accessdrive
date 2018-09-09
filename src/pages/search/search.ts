@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import mapboxGlJs from 'mapbox-gl/dist/mapbox-gl.js';
+
+
 
 /**
  * Generated class for the SearchPage page.
@@ -18,7 +21,13 @@ export class SearchPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SearchPage');
+    console.log('ionViewDidLoad SearchPage'); 
+	mapboxGlJs.accessToken = 'pk.eyJ1IjoidGhpZXJyeWxvcmlzIiwiYSI6ImNqbHVydmNqeTBuaGczcW1lbHljZDNocDYifQ.6q6J-B6RKo9LM6_4P54vkg';
+	var map = new mapboxGlJs.Map({
+	container: 'map',
+	style: 'mapbox://styles/mapbox/streets-v10'
+	});
+
   }
 
 }
