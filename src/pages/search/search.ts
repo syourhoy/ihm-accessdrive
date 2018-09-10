@@ -23,28 +23,37 @@ export class SearchPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SearchPage'); 
-	mapboxGlJs.accessToken = 'pk.eyJ1IjoidGhpZXJyeWxvcmlzIiwiYSI6ImNqbHVydmNqeTBuaGczcW1lbHljZDNocDYifQ.6q6J-B6RKo9LM6_4P54vkg';
-	var map = new mapboxGlJs.Map({
-	container: 'map',
-	style: 'mapbox://styles/mapbox/streets-v10'
-	});
+    this.initMap();
+    let watch = this.geolocation.watchPosition();
 
-this.geolocation.getCurrentPosition().then((resp) => {
- // resp.coords.latitude
- // resp.coords.longitude
-}).catch((error) => {
-  console.log('Error getting location', error);
-});
+    watch.subscribe((data) => {
+      // data can be a set of coordinates, or an error (if an error occurred).
+      console.log(data.coords.latitude);
+      console.log(data.coords.longitude);
+    });
+  }
 
-let watch = this.geolocation.watchPosition();
-watch.subscribe((data) => {
- // data can be a set of coordinates, or an error (if an error occurred).
- console.log(data.coords.latitude);
- console.log(data.coords.longitude);
- // data.coords.latitude
- // data.coords.longitude
-});
+  initMap() {
+    mapboxGlJs.accessToken = 'pk.eyJ1IjoidGhpZXJyeWxvcmlzIiwiYSI6ImNqbHVydmNqeTBuaGczcW1lbHljZDNocDYifQ.6q6J-B6RKo9LM6_4P54vkg';
+    this.getCurrentLocation().then((location) => {
+      let map = new mapboxGlJs.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v10',
+        center: location,
+        zoom: 15
+      });
+      let marker = new mapboxGlJs.Marker()
+        .setLngLat(location)
+        .addTo(map);
+    });
+  }
+
+  getCurrentLocation() {
+    return this.geolocation.getCurrentPosition().then((resp) => {
+      return [resp.coords.longitude, resp.coords.latitude];
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    })
   }
 
 }
