@@ -20,31 +20,27 @@ export class SearchPage {
   private map: any;
   private location: [number, number];
 
-  constructor(public navCtrl: NavController, private geolocation: Geolocation, public service: GeocodingServicesProvider) {
+  constructor(public navCtrl: NavController, public service: GeocodingServicesProvider, public navParams: NavParams) {
     mapboxGlJs.accessToken = 'pk.eyJ1IjoidGhpZXJyeWxvcmlzIiwiYSI6ImNqbHVydmNqeTBuaGczcW1lbHljZDNocDYifQ.6q6J-B6RKo9LM6_4P54vkg';
+    this.location = navParams.get('data');
   }
 
   ionViewDidLoad() {
     this.initMap();
+    this.createMarker(this.location);
   }
 
   initMap() {
-    this.geolocation.getCurrentPosition().then((data) => {
-      this.location = [data.coords.longitude, data.coords.latitude];
       this.map = new mapboxGlJs.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v10',
         center: this.location,
         zoom: 15
       });
-      this.createMarker(this.location);
-
       this.service.getAdressFromCoords(this.location[0], this.location[1]).then((data) => {
         console.log(data['place_name'])
       })
-    }).catch((error) => {
-      console.log('Error getting location', error);
-    });
+  
   }
 
   createMarker(location: [number, number]) {
@@ -52,4 +48,5 @@ export class SearchPage {
       .setLngLat(location)
       .addTo(this.map);
   }
+
 }
