@@ -10,6 +10,7 @@ import { HomePage } from '../pages/home/home';
 import { UsersServicesProvider } from '../providers/users-services/users-services';
 import { SearchPage } from '../pages/search/search';
 import { Geolocation } from '@ionic-native/geolocation';
+import { GeocodingServicesProvider } from '../providers/geocoding-services/geocoding-services';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UsersServicesProvider,
-    Geolocation
+    Geolocation,
+    GeocodingServicesProvider
 
   ]
 })
