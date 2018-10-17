@@ -56,6 +56,17 @@ page-search {
 		box-shadow: 0px -1px 2px 0px rgba(0,0,16,1);
 		background-color: white;
 		border-radius: 15px;
+		transition: 1s;
+		.show {
+			display: block;
+			bottom: 0;
+			transition: 1s;
+		}
+		.hide {
+			display: none;
+			bottom: -30%;
+			transition: 1s;
+		}
 		&-title {
 			display: block;
 			font-size: 20px;

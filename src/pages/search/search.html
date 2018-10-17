@@ -22,7 +22,7 @@
 		</div>
 	</section>
 
-	<section class="compare" [style.visibility]="displayRides ? 'visible' : 'hidden'">
+	<section [className]="displayRides ? 'compare show' : 'compare hide'">
 		<div class="compare-title">Rides</div>
 		<ion-scroll scrollX="true" class="compare-container">
 			<div class="single-compare">
