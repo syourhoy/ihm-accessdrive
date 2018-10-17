@@ -18,17 +18,18 @@ import { GeocodingServicesProvider } from '../../providers/geocoding-services/ge
  export class SearchPage {
 
    private map: any;
-   private location: [number, number] = [48.8566,2.3522];
+   private location: [number, number];
+   private dest: string;
+   private displayRides: boolean = false;
 
    constructor(public navCtrl: NavController, public service: GeocodingServicesProvider, public navParams: NavParams) {
      mapboxGlJs.accessToken = 'pk.eyJ1IjoidGhpZXJyeWxvcmlzIiwiYSI6ImNqbHVydmNqeTBuaGczcW1lbHljZDNocDYifQ.6q6J-B6RKo9LM6_4P54vkg';
-     if(navParams.get("data"))
-       this.location = navParams.get('data');
+     this.location = navParams.get('data');
    }
 
    ionViewDidLoad() {
      this.initMap();
-     // this.createMarker(this.location);
+     this.createMarker(this.location);
 
    }
 
@@ -49,6 +50,10 @@ import { GeocodingServicesProvider } from '../../providers/geocoding-services/ge
      let marker = new mapboxGlJs.Marker()
      .setLngLat(location)
      .addTo(this.map);
+   }
+
+   setDisplayRides() {
+     this.displayRides = true;
    }
 
  }

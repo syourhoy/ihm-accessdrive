@@ -18,13 +18,13 @@
 	<div id='map'></div>
 	<section class="searchBar">
 		<div class="searchBar-container">
-			<ion-input class="phoneNumber" placeholder="Where To?" name="number"></ion-input>
+			<ion-input class="phoneNumber" placeholder="Where To?" name="number" [(ngModel)]="dest" (focusout)="setDisplayRides()"></ion-input>
 		</div>
 	</section>
 
-	<section class="compare">
+	<section class="compare" [style.visibility]="displayRides ? 'visible' : 'hidden'">
 		<div class="compare-title">Rides</div>
-		<div class="compare-container">
+		<ion-scroll scrollX="true" class="compare-container">
 			<div class="single-compare">
 				<img class="single-compare-logo" src="../../assets/imgs/uberlogo.jpg">
 				<p class="single-compare-title">Uber Pool</p>
@@ -49,6 +49,6 @@
 				<p class="single-compare-price">18.40€</p>
 				<p class="single-compare-waiting">8 min</p>
 			</div>
-		</div>
+		</ion-scroll>
 	</section>
 </ion-content>
