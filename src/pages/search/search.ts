@@ -11,42 +11,44 @@ import { GeocodingServicesProvider } from '../../providers/geocoding-services/ge
  * Ionic pages and navigation.
  */
 
-@Component({
-  selector: 'page-search',
-  templateUrl: 'search.html',
-})
-export class SearchPage {
+ @Component({
+   selector: 'page-search',
+   templateUrl: 'search.html',
+ })
+ export class SearchPage {
 
-  private map: any;
-  private location: [number, number];
+   private map: any;
+   private location: [number, number] = [48.8566,2.3522];
 
-  constructor(public navCtrl: NavController, public service: GeocodingServicesProvider, public navParams: NavParams) {
-    mapboxGlJs.accessToken = 'pk.eyJ1IjoidGhpZXJyeWxvcmlzIiwiYSI6ImNqbHVydmNqeTBuaGczcW1lbHljZDNocDYifQ.6q6J-B6RKo9LM6_4P54vkg';
-    this.location = navParams.get('data');
-  }
+   constructor(public navCtrl: NavController, public service: GeocodingServicesProvider, public navParams: NavParams) {
+     mapboxGlJs.accessToken = 'pk.eyJ1IjoidGhpZXJyeWxvcmlzIiwiYSI6ImNqbHVydmNqeTBuaGczcW1lbHljZDNocDYifQ.6q6J-B6RKo9LM6_4P54vkg';
+     if(navParams.get("data"))
+       this.location = navParams.get('data');
+   }
 
-  ionViewDidLoad() {
-    this.initMap();
-    this.createMarker(this.location);
-  }
+   ionViewDidLoad() {
+     this.initMap();
+     // this.createMarker(this.location);
 
-  initMap() {
-      this.map = new mapboxGlJs.Map({
-        container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v10',
-        center: this.location,
-        zoom: 15
-      });
-      this.service.getAdressFromCoords(this.location[0], this.location[1]).then((data) => {
-        console.log(data['place_name'])
-      })
-  
-  }
+   }
 
-  createMarker(location: [number, number]) {
-    let marker = new mapboxGlJs.Marker()
-      .setLngLat(location)
-      .addTo(this.map);
-  }
+   initMap() {
+     this.map = new mapboxGlJs.Map({
+       container: 'map',
+       style: 'mapbox://styles/mapbox/streets-v10',
+       center: this.location,
+       zoom: 15
+     });
+     this.service.getAdressFromCoords(this.location[0], this.location[1]).then((data) => {
+       console.log(data['place_name'])
+     })
 
-}
+   }
+
+   createMarker(location: [number, number]) {
+     let marker = new mapboxGlJs.Marker()
+     .setLngLat(location)
+     .addTo(this.map);
+   }
+
+ }

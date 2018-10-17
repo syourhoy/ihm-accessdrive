@@ -7,14 +7,18 @@
 <link href='https://api.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.css' rel='stylesheet' />
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Search</ion-title>
-  </ion-navbar>
+	<ion-navbar>
+		<ion-title>Map</ion-title>
+	</ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-<div id='map' style='width: 400px; height: 300px;'></div>
-
+	<div id='map'></div>
+	<section class="searchBar">
+		<div class="searchBar-container">
+			<ion-input class="phoneNumber" placeholder="Where To?" name="number"></ion-input>
+		</div>
+	</section>
 </ion-content>
