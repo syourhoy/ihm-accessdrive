@@ -10,33 +10,33 @@ import { HomePage } from '../pages/home/home';
 import { UsersServicesProvider } from '../providers/users-services/users-services';
 import { SearchPage } from '../pages/search/search';
 import { Geolocation } from '@ionic-native/geolocation';
-import { GeocodingServicesProvider } from '../providers/geocoding-services/geocoding-services';
+import { VtcServicesProvider } from '../providers/vtc-services/vtc-services';
 
 
 @NgModule({
   declarations: [
-    MyApp,
-    HomePage,
-    SearchPage
+  MyApp,
+  HomePage,
+  SearchPage
   ],
   imports: [
-    BrowserModule,
-    HttpModule,
-    IonicModule.forRoot(MyApp)
+  BrowserModule,
+  HttpModule,
+  IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    HomePage,
-    SearchPage
+  MyApp,
+  HomePage,
+  SearchPage
   ],
   providers: [
-    StatusBar,
-    SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    UsersServicesProvider,
-    Geolocation,
-    GeocodingServicesProvider
+  StatusBar,
+  SplashScreen,
+  {provide: ErrorHandler, useClass: IonicErrorHandler},
+  UsersServicesProvider,
+  Geolocation,
+  VtcServicesProvider
 
   ]
 })

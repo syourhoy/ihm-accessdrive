@@ -24,30 +24,13 @@
 
 	<section [className]="displayRides ? 'compare show' : 'compare hide'">
 		<div class="compare-title">Rides</div>
-		<ion-scroll scrollX="true" class="compare-container">
-			<div class="single-compare">
-				<img class="single-compare-logo" src="../../assets/imgs/uberlogo.jpg">
-				<p class="single-compare-title">Uber Pool</p>
-				<p class="single-compare-price">18.40€</p>
-				<p class="single-compare-waiting">8 min</p>
-			</div>
-			<div class="single-compare">
-				<img class="single-compare-logo" src="../../assets/imgs/uberlogo.jpg">
-				<p class="single-compare-title">Uber X</p>
-				<p class="single-compare-price">18.40€</p>
-				<p class="single-compare-waiting">8 min</p>
-			</div>
-			<div class="single-compare">
-				<img class="single-compare-logo" src="../../assets/imgs/uberlogo.jpg">
-				<p class="single-compare-title">Uber Van</p>
-				<p class="single-compare-price">18.40€</p>
-				<p class="single-compare-waiting">8 min</p>
-			</div>
-			<div class="single-compare">
-				<img class="single-compare-logo" src="../../assets/imgs/uberlogo.jpg">
-				<p class="single-compare-title">Uber Green</p>
-				<p class="single-compare-price">18.40€</p>
-				<p class="single-compare-waiting">8 min</p>
+		<ion-scroll scrollX="true" class="compare-container" >
+			<div class="single-compare" *ngFor="let vtc of vtcList">
+				<img class="single-compare-logo" src="../../assets/imgs/uberlogo.jpg" *ngIf="vtc.vtc == 'Uber'">
+				<img class="single-compare-logo" src="../../assets/imgs/lecablogo.png" *ngIf="vtc.vtc == 'Lecab'">
+				<p class="single-compare-title">{{ vtc.type }}</p>
+				<p class="single-compare-price">{{ vtc.price }}</p>
+				<p class="single-compare-waiting">{{ vtc.time / 60 }} min</p>
 			</div>
 		</ion-scroll>
 	</section>

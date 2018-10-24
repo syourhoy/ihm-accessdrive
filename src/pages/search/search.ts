@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import mapboxGlJs from 'mapbox-gl/dist/mapbox-gl.js';
 import { Geolocation } from '@ionic-native/geolocation';
-import { GeocodingServicesProvider } from '../../providers/geocoding-services/geocoding-services';
+import { VtcServicesProvider } from '../../providers/vtc-services/vtc-services';
 
 /**
  * Generated class for the SearchPage page.
@@ -18,13 +18,17 @@ import { GeocodingServicesProvider } from '../../providers/geocoding-services/ge
  export class SearchPage {
 
    private map: any;
-   private location: [number, number];
+   private location: [number, number] = [48.8624671, 2.2249402];
    private dest: string;
    private displayRides: boolean = false;
+   private vtcList:any = null;
 
-   constructor(public navCtrl: NavController, public service: GeocodingServicesProvider, public navParams: NavParams) {
+   constructor(public navCtrl: NavController,
+     public vtcService: VtcServicesProvider,
+     public navParams: NavParams) {
      mapboxGlJs.accessToken = 'pk.eyJ1IjoidGhpZXJyeWxvcmlzIiwiYSI6ImNqbHVydmNqeTBuaGczcW1lbHljZDNocDYifQ.6q6J-B6RKo9LM6_4P54vkg';
-     this.location = navParams.get('data');
+     if(navParams.get('data'))
+       this.location = navParams.get('data');
    }
 
    ionViewDidLoad() {
@@ -40,9 +44,6 @@ import { GeocodingServicesProvider } from '../../providers/geocoding-services/ge
        center: this.location,
        zoom: 15
      });
-     this.service.getAdressFromCoords(this.location[0], this.location[1]).then((data) => {
-       console.log(data['place_name'])
-     })
 
    }
 
@@ -53,7 +54,13 @@ import { GeocodingServicesProvider } from '../../providers/geocoding-services/ge
    }
 
    setDisplayRides() {
-     this.displayRides = true;
+     this.vtcService.getVtc(this.location[0], this.location[1], this.dest)
+     .map(response => response.json())
+     .subscribe(data => {
+       console.log(data);
+       this.vtcList = data;
+       this.displayRides = true;
+     });
    }
 
  }

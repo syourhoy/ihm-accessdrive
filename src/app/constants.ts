@@ -1,0 +1,1 @@
+export var API:string = "http://localhost:3000/api";
