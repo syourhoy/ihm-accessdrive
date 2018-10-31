@@ -5,6 +5,7 @@
   Ionic pages and navigation.
 -->
 <link href='https://api.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.css' rel='stylesheet' />
+<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.css' type='text/css' />
 <ion-header>
 
 	<ion-navbar>
@@ -18,7 +19,7 @@
 	<div id='map'></div>
 	<section class="searchBar">
 		<div class="searchBar-container">
-			<ion-input class="phoneNumber" placeholder="Where To?" name="number" [(ngModel)]="dest" (focusout)="setDisplayRides()"></ion-input>
+			<input id="searchBar-input" class="searchBar-input" placeholder="Where To?" name="number" (focusout)="setDisplayRides($event)">
 		</div>
 	</section>
 

@@ -2,9 +2,11 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import mapboxGlJs from 'mapbox-gl/dist/mapbox-gl.js';
 import MapboxDirections from 'mapbox-gl-directions/mapbox-gl-directions.js';
+import MapboxGeocoder from 'searchgeomodule/searchGeoModule.min.js';
+import places from 'places.js';
 import { Geolocation } from '@ionic-native/geolocation';
 import { VtcServicesProvider } from '../../providers/vtc-services/vtc-services';
-import { mapBoxToken } from '../../app/constants';
+import { mapBoxToken, searchApiId, searchApiKey } from '../../app/constants';
 
 /**
  * Generated class for the SearchPage page.
@@ -21,6 +23,7 @@ import { mapBoxToken } from '../../app/constants';
 
    private map: any;
    private direction: any;
+   private geocoder: any;
    private location: [number, number] = [2.2249402, 48.8624671];
    private location1: [number, number] = [2.391359, 48.8140055];
    private dest: string;
@@ -52,9 +55,19 @@ import { mapBoxToken } from '../../app/constants';
      this.direction = new MapboxDirections({
        accessToken: mapBoxToken,
        profile: 'mapbox/driving',
-       interactive: false
+       interactive: false,
+       controls: {
+         inputs: false,
+         instructions: false
+       }
      });
      this.map.addControl(this.direction);
+
+     places({
+       appId: searchApiId,
+       apiKey: searchApiKey,
+       container: document.querySelector('#searchBar-input')
+     });
    }
 
    createMarker(location: [number, number]) {
@@ -63,7 +76,9 @@ import { mapBoxToken } from '../../app/constants';
      .addTo(this.map);
    }
 
-   setDisplayRides() {
+   setDisplayRides(event) {
+     console.log(event.target.value);
+     this.dest = event.target.value;
      this.displayLoader = true;
      this.vtcService.getVtc(this.location[1], this.location[0], this.dest)
      .map(response => response.json())
