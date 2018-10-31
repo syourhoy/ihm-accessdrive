@@ -34,4 +34,9 @@
 			</div>
 		</ion-scroll>
 	</section>
+
+	<div [className]="displayLoader ? 'loader show' : 'loader hide'">
+		<img src="../../assets/imgs/loader.gif">
+		<div class="loader-background"></div>
+	</div>
 </ion-content>

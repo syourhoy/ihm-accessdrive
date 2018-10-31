@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import mapboxGlJs from 'mapbox-gl/dist/mapbox-gl.js';
+import MapboxDirections from 'mapbox-gl-directions/mapbox-gl-directions.js';
 import { Geolocation } from '@ionic-native/geolocation';
 import { VtcServicesProvider } from '../../providers/vtc-services/vtc-services';
+import { mapBoxToken } from '../../app/constants';
 
 /**
  * Generated class for the SearchPage page.
@@ -18,15 +20,18 @@ import { VtcServicesProvider } from '../../providers/vtc-services/vtc-services';
  export class SearchPage {
 
    private map: any;
-   private location: [number, number] = [48.8624671, 2.2249402];
+   private direction: any;
+   private location: [number, number] = [2.2249402, 48.8624671];
+   private location1: [number, number] = [2.391359, 48.8140055];
    private dest: string;
    private displayRides: boolean = false;
+   private displayLoader: boolean = false;
    private vtcList:any = null;
 
    constructor(public navCtrl: NavController,
      public vtcService: VtcServicesProvider,
      public navParams: NavParams) {
-     mapboxGlJs.accessToken = 'pk.eyJ1IjoidGhpZXJyeWxvcmlzIiwiYSI6ImNqbHVydmNqeTBuaGczcW1lbHljZDNocDYifQ.6q6J-B6RKo9LM6_4P54vkg';
+     mapboxGlJs.accessToken = mapBoxToken;
      if(navParams.get('data'))
        this.location = navParams.get('data');
    }
@@ -44,7 +49,12 @@ import { VtcServicesProvider } from '../../providers/vtc-services/vtc-services';
        center: this.location,
        zoom: 15
      });
-
+     this.direction = new MapboxDirections({
+       accessToken: mapBoxToken,
+       profile: 'mapbox/driving',
+       interactive: false
+     });
+     this.map.addControl(this.direction);
    }
 
    createMarker(location: [number, number]) {
@@ -54,12 +64,16 @@ import { VtcServicesProvider } from '../../providers/vtc-services/vtc-services';
    }
 
    setDisplayRides() {
-     this.vtcService.getVtc(this.location[0], this.location[1], this.dest)
+     this.displayLoader = true;
+     this.vtcService.getVtc(this.location[1], this.location[0], this.dest)
      .map(response => response.json())
      .subscribe(data => {
        console.log(data);
-       this.vtcList = data;
+       this.vtcList = data["vtc"];
        this.displayRides = true;
+       this.displayLoader = false;
+       this.direction.setOrigin(this.location);
+       this.direction.setDestination([data["destination"].longitude, data["destination"].latitude]);
      });
    }
 
