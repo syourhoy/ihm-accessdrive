@@ -19,8 +19,9 @@ npm-debug.log*
 .versions/
 coverage/
 dist/
-node_modules/
 !node_modules/mapbox-gl-directions
+!node_modules/mapbox-gl-directions/mapbox-gl-directions.js
+node_modules/
 tmp/
 temp/
 hooks/
