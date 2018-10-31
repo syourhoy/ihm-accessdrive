@@ -2,11 +2,10 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import mapboxGlJs from 'mapbox-gl/dist/mapbox-gl.js';
 import MapboxDirections from 'mapbox-gl-directions/mapbox-gl-directions.js';
-import MapboxGeocoder from 'searchgeomodule/searchGeoModule.min.js';
 import places from 'places.js';
 import { Geolocation } from '@ionic-native/geolocation';
 import { VtcServicesProvider } from '../../providers/vtc-services/vtc-services';
-import { mapBoxToken, searchApiId, searchApiKey } from '../../app/constants';
+import { mapBoxToken, searchApiId, searchApiKey, uberClientId, deepLinkUber, deepLinkLeCab } from '../../app/constants';
 
 /**
  * Generated class for the SearchPage page.
@@ -25,7 +24,7 @@ import { mapBoxToken, searchApiId, searchApiKey } from '../../app/constants';
    private direction: any;
    private geocoder: any;
    private location: [number, number] = [2.2249402, 48.8624671];
-   private location1: [number, number] = [2.391359, 48.8140055];
+   private locationDest: [number, number] = [2.391359, 48.8140055];
    private dest: string;
    private displayRides: boolean = false;
    private displayLoader: boolean = false;
@@ -77,7 +76,6 @@ import { mapBoxToken, searchApiId, searchApiKey } from '../../app/constants';
    }
 
    setDisplayRides(event) {
-     console.log(event.target.value);
      this.dest = event.target.value;
      this.displayLoader = true;
      this.vtcService.getVtc(this.location[1], this.location[0], this.dest)
@@ -88,8 +86,21 @@ import { mapBoxToken, searchApiId, searchApiKey } from '../../app/constants';
        this.displayRides = true;
        this.displayLoader = false;
        this.direction.setOrigin(this.location);
-       this.direction.setDestination([data["destination"].longitude, data["destination"].latitude]);
+       this.locationDest = [data["destination"].longitude, data["destination"].latitude];
+       this.direction.setDestination(this.locationDest);
+     },
+     err => {
+       this.displayLoader = false;
      });
+   }
+
+   buildDeepLink(vtc_type, product_id) {
+     console.log(product_id);
+     if(vtc_type == "Uber") {
+       window.open(deepLinkUber + "?client_id=" + uberClientId + "&product_id=" + product_id + "&pickup[latitude]=" + this.location[0] + "&pickup[longitude]=" + this.location[1] + "&dropoff[latitude]=" + this.locationDest[0] + "&dropoff[longitude]=" + this.locationDest[1]);
+     } else if(vtc_type == "Lecab") {
+       window.open(deepLinkLeCab);
+     }
    }
 
  }

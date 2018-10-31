@@ -5,7 +5,6 @@
   Ionic pages and navigation.
 -->
 <link href='https://api.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.css' rel='stylesheet' />
-<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.css' type='text/css' />
 <ion-header>
 
 	<ion-navbar>
@@ -26,7 +25,7 @@
 	<section [className]="displayRides ? 'compare show' : 'compare hide'">
 		<div class="compare-title">Rides</div>
 		<ion-scroll scrollX="true" class="compare-container" >
-			<div class="single-compare" *ngFor="let vtc of vtcList">
+			<div class="single-compare" *ngFor="let vtc of vtcList" (click)="buildDeepLink(vtc.vtc,vtc.product_id)">
 				<img class="single-compare-logo" src="../../assets/imgs/uberlogo.jpg" *ngIf="vtc.vtc == 'Uber'">
 				<img class="single-compare-logo" src="../../assets/imgs/lecablogo.png" *ngIf="vtc.vtc == 'Lecab'">
 				<p class="single-compare-title">{{ vtc.type }}</p>
