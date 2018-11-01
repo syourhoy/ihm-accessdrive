@@ -23,7 +23,7 @@ import { mapBoxToken, searchApiId, searchApiKey, uberClientId, deepLinkUber, dee
    private map: any;
    private direction: any;
    private geocoder: any;
-   private location: [number, number] = [2.391359, 48.8140055];
+   private location: [number, number] = [2.392310, 48.813919];
    private locationDest: [number, number] = [2.2249402, 48.8624671];
    private dest: string;
    private displayRides: boolean = false;
@@ -98,7 +98,9 @@ import { mapBoxToken, searchApiId, searchApiKey, uberClientId, deepLinkUber, dee
      console.log(product_id);
      console.log(this.location);
      if(vtc_type == "Uber") {
-       window.open(deepLinkUber + "?client_id=" + uberClientId + "&product_id=" + product_id + "&pickup[latitude]=" + this.location[1] + "&pickup[longitude]=" + this.location[0]);
+       let url = `${deepLinkUber}?client_id=${uberClientId}&product_id=${product_id}&action=setPickup&pickup[latitude]=${this.location[1]}
+       &pickup[longitude]=${this.location[0]}&dropoff[latitude]=${this.locationDest[1]}&dropoff[longitude]=${this.locationDest[0]}`;
+       window.open(url, '_system', 'location=no');
      } else if(vtc_type == "Lecab") {
        window.open(deepLinkLeCab);
      }
