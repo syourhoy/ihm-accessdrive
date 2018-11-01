@@ -1,4 +1,4 @@
-export const API:string = "http://54.38.33.114:3000/api";
+export const API:string = "http://54.38.33.114/api";
 
 export const mapBoxToken:string = "pk.eyJ1IjoidGhpZXJyeWxvcmlzIiwiYSI6ImNqbHVydmNqeTBuaGczcW1lbHljZDNocDYifQ.6q6J-B6RKo9LM6_4P54vkg";
 
